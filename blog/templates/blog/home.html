@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Homepage</title>
+    <style media="screen">
+      * {
+         font-size: 20px;
+         font-family: Calibri;
+         padding: 0;
+         margin: 0;
+      }
+      .topbar{
+        width: 100%;
+        padding: 1%;
+        background-color: #50e2d4;
+      }
+      .topbar>span{
+        font-size: 36px;
+        padding: 0 0 0 1%;
+        color: #4d5d53;
+      }
+      .topbar a{
+        font-size: 24px;
+        float:right;
+        padding: 0 3% 0 3%;
+        color: #4d5d53;
+      }
+
+      a{
+        text-decoration: none;
+      }
+
+      .container{
+        background-color: #d3f8f5;
+        width: 50%;
+        margin: auto;
+      }
+
+      .container *{
+        margin: 2%;
+        color: #666666;
+      }
+
+      .container>h1{
+        font-size: 30px;
+        text-align: center;
+        margin: 0;
+        padding: 2% 0 2% 0;
+        border-bottom: 1px solid white;
+        color: #4d5d53;
+      }
+
+      .container>h2{
+        font-size: 25px;
+        text-align: center;
+        margin: 0;
+        padding: 2% 0 2% 0;
+
+      }
+
+      .container p{
+                border-bottom: 1px solid white;
+                text-align: justify;
+                padding: 0 2% 0 2%;
+      }
+      .center {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;
+      }
+      button{
+        width: 18%;
+        border-radius: 10px;
+      }
+      form{
+        width: 18%;
+        border-radius: 10px;
+        display: inline-block;
+      }
+
+    </style>
+	</head>
+	<body>
+    <div class="topbar">
+      <span>Blog Page</span>
+			<span><a href="{% url 'home' %}">Home</a></span>
+            <span><a href="{% url 'create' %}">Create</a></span>
+            {% if request.user.is_authenticated %}
+            <span><a href="{% url 'logout' %}">Logout</a></span>
+            {% else %}
+            <span><a href="{% url 'signup' %}">Sign up</a></span>
+            <span><a href="{% url 'login' %}">Login</a></span>
+            {% endif %}
+
+    </div>
+    <br>
+    <!--<div class="alert alert-success" role="alert">
+        This is a success alert—check it out!
+    </div>-->
+    <br>
+		<div class="container">
+        <br>
+        <h1>All Articles</h1>
+            {% for blog in blogs %}
+            <h2>{{ blog.title }}</h2>
+            <p>
+            {% if blog.header_image %}
+            <span><img src="{{ blog.header_image.url }}" class="center"></span><br>
+            {% endif %}
+            <span>{{ blog.article }}</span>
+            <br>
+            <button style="margin-left: 4%;"><a href="{% url 'update' blog.id %}">Update</a></button>
+            <button type="submit" style="margin-left: 4%;"><a href="{% url 'delete' blog.id %}">Delete</a></button>
+            </p>
+            {% endfor %}
+
+    </div>
+	</body>
+</html>
+
+

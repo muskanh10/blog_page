@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Update Blog</title>
+    <style media="screen">
+      * {
+         font-size: 20px;
+         font-family: Calibri;
+         padding: 0;
+         margin: 0;
+      }
+      .topbar{
+        width: 100%;
+        padding: 1%;
+        background-color: #50e2d4;
+      }
+      .topbar>span{
+        font-size: 36px;
+        padding: 0 0 0 1%;
+        color: #4d5d53;
+      }
+      .topbar a{
+        font-size: 24px;
+        float:right;
+        padding: 0 3% 0 3%;
+        color: #4d5d53;
+      }
+
+      a{
+        text-decoration: none;
+      }
+
+      .container{
+        background-color: #d3f8f5;
+        width: 55%;
+        margin: auto;
+      }
+
+      .container *{
+        margin: 2%;
+        color: #666666;
+      }
+
+      .container>h1{
+        font-size: 30px;
+        text-align: center;
+        margin: 0;
+        padding: 2% 0 2% 0;
+        border-bottom: 1px solid white;
+        color: #4d5d53;
+      }
+
+      form>*{
+        border-radius: 10px;
+        width: 90%;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <span>Blog Page</span>
+      <span><a href="{% url 'home' %}">Home</a></span>
+      <span><a href="{% url 'create' %}">Create</a></span>
+    </div>
+    <br>
+    <br>
+
+    <div class="container">
+      <h1>Update a Blog</h1>
+      <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <label for="title">Enter your updated blog here </label><br>
+          {{ form.title }}<br>
+          <label for="header_image">Browse Image</label><br>
+          {{ form.header_image }}
+          <label for="article"> </label><br>
+          {{ form.article }}
+          <button type="submit" style="padding: 1%;">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

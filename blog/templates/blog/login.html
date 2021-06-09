@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login Page</title>
+    <style media="screen">
+      * {
+         font-size: 20px;
+         font-family: Calibri;
+         padding: 0;
+         margin: 0;
+      }
+      .topbar{
+        width: 100%;
+        padding: 1%;
+        background-color: #50e2d4;
+      }
+      .topbar>span{
+        font-size: 36px;
+        padding: 0 0 0 1%;
+        color: #4d5d53;
+      }
+      .topbar a{
+        font-size: 24px;
+        float:right;
+        padding: 0 3% 0 3%;
+        color: #4d5d53;
+      }
+
+      a{
+        text-decoration: none;
+      }
+
+      .container{
+        background-color: #d3f8f5;
+        width: 30%;
+        margin: auto;
+      }
+
+      .container *{
+        margin: 2%;
+        color: #666666;
+      }
+
+      .container>h1{
+        font-size: 30px;
+        text-align: center;
+        margin: 0;
+        padding: 2% 0 2% 0;
+        border-bottom: 1px solid white;
+        color: #4d5d53;
+      }
+
+      button{
+        width: 18%;
+        border-radius: 10px;
+      }
+      form{
+        border-radius: 10px;
+        display: inline-block;
+        text-align: right;
+        width:60%;
+      }
+
+    </style>
+	</head>
+	<body>
+    <div class="topbar">
+      <span>Blog Page</span>
+			<span><a href="{% url 'home' %}">Home</a></span>
+			<span><a href="{% url 'create' %}">Create</a></span>
+            <span><a href="{% url 'signup' %}">Sign up</a></span>
+            <span><a href="{% url 'login' %}">Login</a></span>
+
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <h1>Login Page</h1>
+        <form method="POST" novalidate>
+          {% csrf_token %}
+            {% for fm in form %}
+            <div>
+                {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}
+                <br>
+            </div>
+            {% endfor %}
+            <input type="submit" value="Login">
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p>{{error}}</p>
+                {% endfor %}
+            {% endif %}
+         </form>
+    </div>
+</body>
+</html>
